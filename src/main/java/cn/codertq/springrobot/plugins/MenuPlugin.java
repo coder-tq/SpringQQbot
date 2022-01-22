@@ -6,6 +6,8 @@ import com.mikuac.shiro.core.Bot;
 import com.mikuac.shiro.core.BotPlugin;
 import com.mikuac.shiro.dto.event.message.GroupMessageEvent;
 import com.mikuac.shiro.dto.event.message.PrivateMessageEvent;
+import com.simplerobot.modules.utils.KQCodeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +27,8 @@ public class MenuPlugin extends BotPlugin {
         if (!ShiroUtils.getAtList(event.getArrayMsg()).contains(bot.getSelfId())){
             return MESSAGE_IGNORE;
         }
-
-        if (event.getMessage().contains("菜单")||event.getMessage().contains("功能")){
+        final String msg = KQCodeUtils.getInstance().removeByType("at", event.getMessage());
+        if (StringUtils.contains(msg,"菜单")||StringUtils.contains(msg,"功能")|| StringUtils.isBlank(msg)){
             bot.sendGroupMsg(event.getGroupId(),"这里是菜单",false);
             return MESSAGE_BLOCK;
         }
