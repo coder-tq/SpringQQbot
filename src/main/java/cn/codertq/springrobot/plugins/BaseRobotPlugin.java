@@ -1,6 +1,7 @@
 package cn.codertq.springrobot.plugins;
 
 import cn.codertq.springrobot.config.RobotConfig;
+import com.mikuac.shiro.common.utils.ShiroUtils;
 import com.mikuac.shiro.core.Bot;
 import com.mikuac.shiro.core.BotPlugin;
 import com.mikuac.shiro.dto.event.message.GroupMessageEvent;
@@ -51,6 +52,9 @@ public class BaseRobotPlugin extends BotPlugin {
     public int onGroupMessage(@NotNull Bot bot, @NotNull GroupMessageEvent event) {
         if (robotConfig.getWhiteGroupList().contains(event.getGroupId())||robotConfig.getWhiteUserList().contains(event.getUserId())){
             return MESSAGE_IGNORE;
+        }
+        if (ShiroUtils.getAtList(event.getArrayMsg()).contains(bot.getSelfId())){
+            bot.sendGroupMsg(event.getGroupId(),"本群("+event.getGroupId()+")暂未开启机器人，请联系QQ909413805开启相应的群功能",false);
         }
         return MESSAGE_BLOCK;
     }
