@@ -4,6 +4,8 @@ import com.mikuac.shiro.common.utils.MsgUtils;
 import com.mikuac.shiro.common.utils.ShiroUtils;
 import com.mikuac.shiro.core.Bot;
 import com.mikuac.shiro.core.BotPlugin;
+import com.mikuac.shiro.dto.action.common.ActionData;
+import com.mikuac.shiro.dto.action.response.GroupMemberInfoResp;
 import com.mikuac.shiro.dto.event.message.GroupMessageEvent;
 import com.mikuac.shiro.dto.event.message.PrivateMessageEvent;
 import com.mikuac.shiro.dto.event.notice.GroupMsgDeleteNoticeEvent;
@@ -25,6 +27,8 @@ public class MessageProcessPlugin extends BotPlugin {
 
     @Autowired
     RedisTemplate<String,String> redisTemplate;
+
+    static String MESSAGE_DELETE_TEMPLATE = "%s\n\t--%s撤回了一条消息";
 
     /**
      * 简易复读机
@@ -63,7 +67,8 @@ public class MessageProcessPlugin extends BotPlugin {
      */
     @Override
     public int onGroupMsgDeleteNotice(@NotNull Bot bot, @NotNull GroupMsgDeleteNoticeEvent event) {
-        bot.sendGroupMsg(event.getGroupId(),redisTemplate.opsForValue().get(String.valueOf(event.getMsgId())),false);
+        final ActionData<GroupMemberInfoResp> memberInfo = bot.getGroupMemberInfo(event.getGroupId(), event.getUserId(), false);
+        bot.sendGroupMsg(event.getGroupId(),String.format(MESSAGE_DELETE_TEMPLATE,redisTemplate.opsForValue().get(String.valueOf(event.getMsgId())),memberInfo.getData().getCard()),false);
         return MESSAGE_IGNORE;
     }
 }
