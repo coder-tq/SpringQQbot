@@ -26,6 +26,12 @@ public class MessageProcessPlugin extends BotPlugin {
     @Autowired
     RedisTemplate<String,String> redisTemplate;
 
+    /**
+     * 简易复读机
+     * @param bot
+     * @param event
+     * @return
+     */
     @Override
     public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
         bot.sendPrivateMsg(event.getUserId(), event.getMessage(), false);
@@ -33,6 +39,12 @@ public class MessageProcessPlugin extends BotPlugin {
         return MESSAGE_IGNORE;
     }
 
+    /**
+     * 检测群中@机器人的消息并进行复读，所有消息都保存在redis中，当检测到撤回消息时可以防撤回
+     * @param bot
+     * @param event
+     * @return
+     */
     @Override
     public int onGroupMessage(@NotNull Bot bot, @NotNull GroupMessageEvent event) {
         redisTemplate.opsForValue().set(String.valueOf(event.getMessageId()), event.getMessage());
@@ -43,6 +55,12 @@ public class MessageProcessPlugin extends BotPlugin {
         return MESSAGE_IGNORE;
     }
 
+    /**
+     * 防撤回
+     * @param bot
+     * @param event
+     * @return
+     */
     @Override
     public int onGroupMsgDeleteNotice(@NotNull Bot bot, @NotNull GroupMsgDeleteNoticeEvent event) {
         bot.sendGroupMsg(event.getGroupId(),redisTemplate.opsForValue().get(String.valueOf(event.getMsgId())),false);
