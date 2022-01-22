@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: robot-consumer
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8849
+        file-extension: yaml
+      discovery:
+        server-addr: 127.0.0.1:8849
+shiro:
+  plugin-list:
+    - cn.codertq.springrobot.plugins.BaseRobotPlugin
+    - cn.codertq.springrobot.plugins.AnswerQueryPlugin
+    - cn.codertq.springrobot.plugins.MessageProcessPlugin
