@@ -13,5 +13,9 @@ spring:
 shiro:
   plugin-list:
     - cn.codertq.springrobot.plugins.BaseRobotPlugin
+    - cn.codertq.springrobot.plugins.CFRatingPlugin
     - cn.codertq.springrobot.plugins.AnswerQueryPlugin
     - cn.codertq.springrobot.plugins.MessageProcessPlugin
+mybatis:
+  type-aliases-package: cn.codertq.springrobot.domain.entity
+  mapper-locations: classpath:mybatis/mapper/*.xml
