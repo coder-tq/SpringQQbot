@@ -33,7 +33,7 @@
     from cf_user
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="selectByQQNumber" resultType="cn.codertq.springrobot.domain.entity.CfUser">
+    <select id="selectByQQNumber" resultMap="BaseResultMap">
       select
       <include refid="Base_Column_List" />
       from cf_user
