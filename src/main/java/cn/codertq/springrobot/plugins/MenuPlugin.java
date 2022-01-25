@@ -30,7 +30,7 @@ public class MenuPlugin extends BotPlugin {
         final String msg = KQCodeUtils.getInstance().removeByType("at", event.getMessage());
         if (StringUtils.contains(msg,"菜单")||StringUtils.contains(msg,"功能")|| StringUtils.isBlank(msg)){
             bot.sendGroupMsg(event.getGroupId(),"这里是菜单",false);
-            return MESSAGE_BLOCK;
+            return MESSAGE_IGNORE;
         }
 
 
