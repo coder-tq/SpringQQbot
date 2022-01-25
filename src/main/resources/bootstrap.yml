@@ -13,6 +13,8 @@ spring:
 shiro:
   plugin-list:
     - cn.codertq.springrobot.plugins.BaseRobotPlugin
+    - cn.codertq.springrobot.plugins.MenuPlugin
+    - cn.codertq.springrobot.plugins.DogLickingDiaryPlugin
     - cn.codertq.springrobot.plugins.CFRatingPlugin
     - cn.codertq.springrobot.plugins.AnswerQueryPlugin
     - cn.codertq.springrobot.plugins.MessageProcessPlugin
