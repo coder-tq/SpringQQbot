@@ -12,6 +12,7 @@ spring:
         server-addr: 127.0.0.1:8849
 shiro:
   plugin-list:
+    - cn.codertq.springrobot.plugins.TempPlugin
     - cn.codertq.springrobot.plugins.BaseRobotPlugin
     - cn.codertq.springrobot.plugins.MenuPlugin
     - cn.codertq.springrobot.plugins.DogLickingDiaryPlugin
