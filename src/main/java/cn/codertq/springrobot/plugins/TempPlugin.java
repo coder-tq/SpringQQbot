@@ -24,7 +24,7 @@ public class TempPlugin extends BotPlugin {
             Pattern r = Pattern.compile(pattern);
             Matcher m = r.matcher(event.getMessage());
             if (m.find()){
-                if (Integer.parseInt(m.group(1)) >= 700){
+                if (Integer.parseInt(m.group(1)) >= 800){
                     bot.sendGroupMsg(657613385L,event.getMessage(),false);
                 };
             }
