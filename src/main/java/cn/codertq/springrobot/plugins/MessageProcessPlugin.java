@@ -67,6 +67,9 @@ public class MessageProcessPlugin extends BotPlugin {
      */
     @Override
     public int onGroupMsgDeleteNotice(@NotNull Bot bot, @NotNull GroupMsgDeleteNoticeEvent event) {
+        if(bot.getSelfId() == event.getUserId()) {
+            return MESSAGE_IGNORE;
+        }
         final ActionData<GroupMemberInfoResp> memberInfo = bot.getGroupMemberInfo(event.getGroupId(), event.getUserId(), false);
         bot.sendGroupMsg(event.getGroupId(),String.format(MESSAGE_DELETE_TEMPLATE,redisTemplate.opsForValue().get(String.valueOf(event.getMsgId())),memberInfo.getData().getCard()),false);
         return MESSAGE_IGNORE;
