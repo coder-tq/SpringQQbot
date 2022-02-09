@@ -35,6 +35,6 @@ public class DogLickingDiaryPlugin extends BotPlugin {
         final BaseResult<TianGouRiJiDTO> result = new Gson().fromJson(s, new TypeToken<BaseResult<TianGouRiJiDTO>>() {
         }.getType());
         bot.sendGroupMsg(event.getGroupId(),result.getData().getComment(),false);
-        return MESSAGE_BLOCK;
+        return MESSAGE_IGNORE;
     }
 }
