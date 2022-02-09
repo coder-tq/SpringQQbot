@@ -1,5 +1,9 @@
 package cn.codertq.springrobot.utils;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.springframework.http.*;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -137,7 +141,13 @@ public class HttpUtil {
         if (url == null || url.trim().isEmpty()) {
             return null;
         }
-        RestTemplate client = new RestTemplate();
+        final RestTemplate restTemplate = new RestTemplate();
+        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        final HttpClient httpClient = HttpClientBuilder.create()
+                .setRedirectStrategy(new LaxRedirectStrategy())
+                .build();
+        factory.setHttpClient(httpClient);
+        restTemplate.setRequestFactory(factory);
         // header
         HttpHeaders httpHeaders = new HttpHeaders();
         if (headers != null) {
@@ -146,7 +156,7 @@ public class HttpUtil {
         // 提交方式：表单、json
         httpHeaders.setContentType(mediaType);
         HttpEntity<Object> httpEntity = new HttpEntity(params, httpHeaders);
-        ResponseEntity<String> response = client.exchange(url, method, httpEntity, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(url, method, httpEntity, String.class);
         return response.getBody();
     }
 }
