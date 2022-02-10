@@ -14,4 +14,5 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "token")
 public class TokenConfig {
     String cxAuthorityToken;
+    String dailyNewsToken;
 }

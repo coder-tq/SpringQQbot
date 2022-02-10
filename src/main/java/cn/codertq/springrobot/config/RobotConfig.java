@@ -18,4 +18,5 @@ public class RobotConfig {
     List<Long> whiteGroupList;
     List<Long> whiteUserList;
     List<Long> blackUserList;
+    List<Long> dailyNewsPushGroupList;
 }
