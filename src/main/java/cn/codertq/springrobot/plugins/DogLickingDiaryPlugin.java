@@ -17,7 +17,8 @@ import org.springframework.stereotype.Component;
  * @author coder_tq
  * @Date 2022/1/24 11:19
  */
-@Component
+@Deprecated
+//@Component
 public class DogLickingDiaryPlugin extends BotPlugin {
 
     static final String PLUGIN_KEY = "舔狗日记";

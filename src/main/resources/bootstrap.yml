@@ -16,7 +16,6 @@ shiro:
     - cn.codertq.springrobot.plugins.MenuPlugin
     - cn.codertq.springrobot.plugins.AnswerBookPlugin
     - cn.codertq.springrobot.plugins.DailyNewsPlugin
-    - cn.codertq.springrobot.plugins.DogLickingDiaryPlugin
     - cn.codertq.springrobot.plugins.CFRatingPlugin
     - cn.codertq.springrobot.plugins.AnswerQueryPlugin
     - cn.codertq.springrobot.plugins.MessageProcessPlugin
